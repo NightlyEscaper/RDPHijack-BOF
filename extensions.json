@@ -1,0 +1,50 @@
+{
+    "name": "RDPHijack",
+    "version": "0.0.1",
+    "command_name": "rdphijack",
+    "extension_author": "netero1010",
+    "original_author": "netero1010",
+    "repo_url": "https://github.com/NightlyEscaper/RDPHijack-BOF",
+    "help": "Uses WinStationConnect API to perform local/remote RDP session hijacking. ",
+    "long_help": "Sample usage\n--------\nRedirect session 2 to session 1 (require SYSTEM privilege):\nbof-rdphijack 1 2\n\nRedirect session 2 to session 1 with password of the user who owns the session 2 (require high integrity beacon):\nbof-rdphijack 1 2 password P@ssw0rd123\n\nRedirect session 2 to session 1 for a remote server (require token/ticket of the user who owns the session 2):\nbof-rdphijack 1 2 server SQL01.lab.internal",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "rdphijack.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "rdphijack.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "session",
+            "desc": "Your console session id.",
+            "type": "int",
+            "optional": false
+        },
+        {
+            "name": "target",
+            "desc": "Target session id to hijack.",
+            "type": "int",
+            "optional": false
+        },
+        {
+            "name": "password | server",
+            "desc": "password        Specifies the password of the user who owns the session to which you want to connect.\n\t\t\t\tserver          Specifies the remote server that you want to perform RDP hijacking.",
+            "type": "wstring",
+            "optional": false
+        },
+        {
+            "name": "value",
+            "desc": "Input some value of passwor or server.",
+            "type": "wstring",
+            "optional": false
+        }
+    ]
+}
